@@ -5,18 +5,16 @@ from rest_framework.decorators import api_view
 from .models import *
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView
 
 
-class GetList(APIView):
-    def get(self,request):
-        model = Student.objects.all()
-        Serial=StudentSerializer(model,many = True)
-        return Response(Serial.data)
-    def post(self,request):
-        Serial = StudentSerializer(data=request.data)
-        Serial.is_valid(raise_exception=True)
-        Serial.save()
-        return Response(Serial.data,status=status.HTTP_201_CREATED)
+class GetList(ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+
+
 
 
 class ModifyList(APIView):
