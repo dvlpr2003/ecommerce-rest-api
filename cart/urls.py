@@ -1,6 +1,6 @@
 from django.urls import *
 from .views import *
 urlpatterns = [
-    path("",index),
-    path("<int:pk>",get_Student)
+    path("",GetList.as_view()),
+    path("<int:pk>",ModifyList.as_view())
 ]
