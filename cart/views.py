@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from .models import *
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 
 
 class GetList(ListCreateAPIView):
@@ -17,21 +17,27 @@ class GetList(ListCreateAPIView):
 
 
 
-class ModifyList(APIView):
-    def put(self,request,pk):
-        model =get_object_or_404(Student,id=pk)
-        Serial = StudentSerializer(model,data =request.data)
-        Serial.is_valid(raise_exception=True)
-        Serial.save()
-        return Response(Serial.data)
-    def delete(self,request,pk):
-        model =get_object_or_404(Student,id=pk)
-        model.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    def get(self,request,pk):
-        model =get_object_or_404(Student,id=pk)
-        Serial = StudentSerializer(model)
-        return Response(Serial.data)
+class ModifyList(RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+
+
+    # def put(self,request,pk):
+    #     model =get_object_or_404(Student,id=pk)
+    #     Serial = StudentSerializer(model,data =request.data)
+    #     Serial.is_valid(raise_exception=True)
+    #     Serial.save()
+    #     return Response(Serial.data)
+    # def delete(self,request,pk):
+    #     model =get_object_or_404(Student,id=pk)
+    #     model.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    # def get(self,request,pk):
+    #     model =get_object_or_404(Student,id=pk)
+    #     Serial = StudentSerializer(model)
+    #     return Response(Serial.data)
 
 
 
