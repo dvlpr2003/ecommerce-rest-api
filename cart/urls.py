@@ -1,6 +1,8 @@
 from django.urls import *
 from .views import *
-urlpatterns = [
-    path("",GetList.as_view()),
-    path("<int:pk>",ModifyList.as_view())
-]
+from rest_framework.routers import DefaultRouter
+
+route = DefaultRouter()
+route.register("list",GetList)
+urlpatterns = route.urls
+
