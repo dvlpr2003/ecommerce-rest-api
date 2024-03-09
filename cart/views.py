@@ -14,10 +14,9 @@ def index(request):
         return Response(Serial.data)
     elif request.method == "POST":
         Serial = StudentSerializer(data=request.data)
-        if Serial.is_valid():
-            Serial.save()
-            return Response(Serial.data,status=status.HTTP_201_CREATED)
-        return Response(Serial.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+        Serial.is_valid(raise_exception=True)
+        Serial.save()
+        return Response(Serial.data,status=status.HTTP_201_CREATED)
 @api_view(["GET","DELETE","PUT"])
 def get_Student(request,pk):
     model =get_object_or_404(Student,id=pk)
@@ -27,14 +26,13 @@ def get_Student(request,pk):
         return Response(Serial.data)
     elif request.method == "DELETE":
         model.delete()
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == "PUT":
         Serial = StudentSerializer(model,data =request.data)
-        if Serial.is_valid():
-            Serial.save()
-            return Response(Serial.data)
-        else:
-            return Response(Serial.errors)
+        Serial.is_valid(raise_exception=True)
+        Serial.save()
+        return Response(Serial.data)
+    
         
         
 
