@@ -1,13 +1,12 @@
 from django_filters.rest_framework import FilterSet
 
 
-from .models import Student
+from userinfo.models import *
 
 
 class STDFilter(FilterSet):
     class Meta:
-        model = Student
+        model = User_info
         fields ={
-            "department":["exact"],
-            "age":["gt","lt"]
+            "name":["exact"],
         }

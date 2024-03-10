@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from .models import Student
+from userinfo.models import *
 
-class StudentSerializer(serializers.ModelSerializer):
+class categorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
-        fields ="__all__"
-
-        
+        model = Category
+        fields = "__all__"
+class userSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_info
+        fields = "__all__"
+    category = serializers.StringRelatedField()
         
