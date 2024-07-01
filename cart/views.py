@@ -19,7 +19,7 @@ class GetList(ModelViewSet):
     serializer_class =userSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_class = STDFilter
-    search_fields = ["name"]
+    search_fields = ["name",]
     ordering_fields = [
         "name"
     ]
@@ -27,15 +27,12 @@ class GetList(ModelViewSet):
 
 
 
-
-# class GetUser(ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializers
-
-        
-
+class GetProduct(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     
-
-
+class GetCategory(ModelViewSet):
+    queryset=Category.objects.all()
+    serializer_class = categorySerializer
         
 
