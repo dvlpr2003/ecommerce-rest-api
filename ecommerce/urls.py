@@ -19,6 +19,7 @@ from django.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("pdf-to-txt/",include("pdftotxt.urls"))
     
     
 ]
